@@ -1,0 +1,22 @@
+<%- contentFor('body') %>
+<div>
+    <div class="py-5 text-center">
+        <h2>Dwitter</h2>
+        <p class="lead">Decentralized Twitter</p>
+    </div>
+    <form action="/createUser" method="POST">
+        <div class="form-group row">
+            <label for="nickname" class="col-sm-2 col-form-label">Nickname</label>
+            <div class="col-sm-10">
+                <input type="text" name="nickname" class="form-control" id="nickname" placeholder="Nickname">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="biography" class="col-sm-2 col-form-label">Biography</label>
+            <div class="col-sm-10">
+                <input type="text" name="biography" class="form-control" id="biography" placeholder="Biography">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Create account</button>
+    </form>
+</div>
