@@ -44,45 +44,22 @@
         </nav>
     </div>
     <div class="container">
-        <div class="container-fluid card my-4">
-            <div class="card-body">
-                <form action="" method="post">
-                    <div class="form-group">
-                        <textarea class="form-control" id="textoDuvida" rows="3" placeholder="O que está acontecendo?" name="texto"></textarea>
+        <% for(tweet of feed) {%>
+            <div class="container-fluid card card-outline-secondary my-4">
+                <div class="card-body">
+                    <div class="media mb-4">
+                        <div class="media-body">
+                            <p class="mt-0 user"> <%= tweet.user["nickname"] %>
+                            <br>
+                            <small class="text-muted"><%= tweet.user["id"] %></small>
+                            </p>
+                            <p class="mt-0 user"><%= tweet["tweet"] %></p>
+                            <br>
+                            <small class="text-muted"><%= new Date(tweet["publication_date"] * 1000) %></small>
+                        </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Postar</button>
-                </form>
-            </div>
-        </div>
-    </div>  
-    <div class="container">
-        <div class="container-fluid card card-outline-secondary my-4">
-            <div class="card-body">
-                <div class="media mb-4">
-                <div class="media-body">
-                    <p class="mt-0 user">mrayanealves
-                        <br>
-                        <small class="text-muted">Maria Rayane Alves</small>
-                    </p>
-                    <p>Estou com fome</p>
-                </div>
-                <div class="media mb-4 container-like-deslike">
-                    <a href="">
-                        <div class="row">
-                            <div class="col-md-1 like"><span class="oi oi-thumb-up"></span></div>
-                            <div class="col-md-7"><p class="like">0</p></div>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="row">
-                            <div class="col-md-1 deslike"><span class="oi oi-thumb-down"></span></div>
-                            <div class="col-md-7"><p class="deslike">0</p></div>
-                        </div>
-                    </a>
                 </div>
             </div>
-            <hr>
-            </div>
-        </div>
+        <% } %>
     </div>
 </div>

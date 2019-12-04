@@ -51,6 +51,52 @@ var abiTwitter = [
 		"name": "feed",
 		"outputs": [
 			{
+				"components": [
+					{
+						"components": [
+							{
+								"name": "id",
+								"type": "address"
+							},
+							{
+								"name": "nickname",
+								"type": "string"
+							},
+							{
+								"name": "biography",
+								"type": "string"
+							},
+							{
+								"name": "active",
+								"type": "bool"
+							}
+						],
+						"name": "user",
+						"type": "tuple"
+					},
+					{
+						"name": "tweet",
+						"type": "string"
+					},
+					{
+						"name": "publication_date",
+						"type": "uint256"
+					}
+				],
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getFollowing",
+		"outputs": [
+			{
 				"name": "",
 				"type": "address[]"
 			}
@@ -62,13 +108,31 @@ var abiTwitter = [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "getTweetsByAddress",
+		"name": "getMyTweets",
 		"outputs": [
 			{
 				"components": [
 					{
-						"name": "publicAddress",
-						"type": "address"
+						"components": [
+							{
+								"name": "id",
+								"type": "address"
+							},
+							{
+								"name": "nickname",
+								"type": "string"
+							},
+							{
+								"name": "biography",
+								"type": "string"
+							},
+							{
+								"name": "active",
+								"type": "bool"
+							}
+						],
+						"name": "user",
+						"type": "tuple"
 					},
 					{
 						"name": "tweet",

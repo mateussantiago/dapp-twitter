@@ -1,7 +1,6 @@
 const twitter = require('../model/twitter');
 
 exports.login = (req, res) => {
-    console.log("entrei")
     twitter.twitterContract.methods.isUser().call().then(isUser => {
         
         if (isUser) {
@@ -10,12 +9,12 @@ exports.login = (req, res) => {
             return;
         }
         
-        console.log("entrei aqui")
         res.render("pages/login");
 
     }).catch(error => {
         console.log(error)
-        console.log("erro");    
+        
+
         res.render("index");
     });
 };
@@ -52,15 +51,11 @@ exports.createUser = (req, res) => {
 
 
 exports.feed = (req, res) => {
-    twitter.twitterContract.methods.feed().call().then(addresses => {
-        
-        for (address of addresses) {
-            console.log(address)
-        }
+    twitter.twitterContract.methods.feed().call().then(tweets => {
+        console.log(tweets);
         res.render("pages/feed", {
-            address : addresses 
+            feed : tweets.sort((a, b) => b.publication_date - a.publication_date)
         });
-
 
     }).catch(error => {
         console.log(error);
