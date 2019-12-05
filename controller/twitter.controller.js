@@ -2,13 +2,13 @@ const twitter = require('../model/twitter');
 
 exports.login = (req, res) => {
     twitter.twitterContract.methods.isUser().call().then(isUser => {
-        
         if (isUser) {
-            res.redirect("/feed");
+            console.log("entrei")
+            res.redirect("/home");
             
             return;
         }
-        
+        console.log(isUser)
         res.render("pages/login");
 
     }).catch(error => {
@@ -19,9 +19,8 @@ exports.login = (req, res) => {
     });
 };
 
-
 exports.createUser = (req, res) => {
-    const nickname = req.body.nickname;
+    const nickname = req.body.nickname.toLowerCase();
     const biography = req.body.biography;
 
     twitter.userAddress.then(userAddress => {
@@ -34,7 +33,7 @@ exports.createUser = (req, res) => {
         twitter.twitterContract.methods.createUser(nickname, biography).send(bodyTransaction).then(result => {
             console.log("Successfully created user: " + userAddress);
 
-            res.redirect("/feed");
+            res.redirect("/home");
 
         }).catch(error => {
             console.log(error);
@@ -49,12 +48,20 @@ exports.createUser = (req, res) => {
     })
 };
 
+exports.profile = (req, res) => {
+    twitter.twitterContract.methods.getMyTweets().call().then(tweets => {
+        
+        res.render("pages/profile", {
+           myTweets : tweets.sort((a, b) => b.publication_date - a.publication_date) 
+        });
+    });
+};
 
-exports.feed = (req, res) => {
+exports.home = (req, res) => {
     twitter.twitterContract.methods.feed().call().then(tweets => {
-        console.log(tweets);
-        res.render("pages/feed", {
-            feed : tweets.sort((a, b) => b.publication_date - a.publication_date)
+
+        res.render("pages/home", {
+            tweets : tweets.sort((a, b) => b.publication_date - a.publication_date)
         });
 
     }).catch(error => {
@@ -62,7 +69,52 @@ exports.feed = (req, res) => {
 
         res.redirect("/");
     });
-}
+};
+
+exports.publishTweet = (req, res) => {
+    const tweet = req.body.tweet;
+
+    twitter.userAddress.then(userAddress => {
+        const bodyTransaction = {
+            from : userAddress,
+            value : 1000000000000000000*0.1,
+            gas : 3000000
+        }
+
+        twitter.twitterContract.methods.postTweet(tweet).send(bodyTransaction).then(result => {
+            
+            res.redirect("/profile");
+        });
+    }).catch(error => {
+        console.log(error);
+
+        res.redirect("/profile")
+    });
+
+};
+ 
+exports.findUser = (req, res) => {
+    const query = req.body.query;
+
+    if (query.substring(0,2) == "0x") {
+        twitter.twitterContract.methods.searchUserByAddress(query).call().then(userFound => {
+            
+            res.render("pages/search", {
+                user : userFound
+            });
+        });
+    }
+    else {
+        twitter.twitterContract.methods.searchUserByNickname(query).call().then(userFound => {
+            
+            res.render("pages/search", {
+               user : userFound 
+            });
+        });
+    }
+
+};
+
 
 exports.findTweetsByAddress = (req, res) => {
     twitter.methods.getTweetsByAddress().call().then(tweets => {

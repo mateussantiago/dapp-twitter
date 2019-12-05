@@ -164,6 +164,80 @@ var abiTwitter = [
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "userAddress",
+				"type": "address"
+			}
+		],
+		"name": "searchUserByAddress",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "id",
+						"type": "address"
+					},
+					{
+						"name": "nickname",
+						"type": "string"
+					},
+					{
+						"name": "biography",
+						"type": "string"
+					},
+					{
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "nickname",
+				"type": "string"
+			}
+		],
+		"name": "searchUserByNickname",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "id",
+						"type": "address"
+					},
+					{
+						"name": "nickname",
+						"type": "string"
+					},
+					{
+						"name": "biography",
+						"type": "string"
+					},
+					{
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
 

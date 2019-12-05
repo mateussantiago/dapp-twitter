@@ -3,9 +3,9 @@
     <div class="container">
         <div class="container-fluid card my-4">
             <div class="card-body">
-                <form action="publishTweet" method="post">
+                <form action="/publishTweet" method="post">
                     <div class="form-group">
-                        <textarea class="form-control" id="textoDuvida" rows="3" placeholder="O que está acontecendo?" name="texto"></textarea>
+                        <textarea class="form-control" id="tweet" rows="1" placeholder="What's happening?" name="tweet"></textarea>
                     </div>
                     <button class="btn btn-primary" type="submit">Publish</button>
                 </form>
@@ -13,7 +13,7 @@
         </div>
     </div>  
     <div class="container">
-            <% for(tweet of feed) {%>
+            <% for(tweet of myTweets) {%>
                 <div class="container-fluid card card-outline-secondary my-4">
                     <div class="card-body">
                         <div class="media mb-4">
@@ -21,7 +21,7 @@
                                 <p class="mt-0 user"> <%= tweet.user["nickname"] %>
                                 <br>
                                 <small class="text-muted"><%= tweet.user["id"] %></small>
-                                home                           </p>
+                                </p>
                                 <p class="mt-0 user"><%= tweet["tweet"] %></p>
                                 <br>
                                 <small class="text-muted"><%= new Date(tweet["publication_date"] * 1000) %></small>
