@@ -3,6 +3,38 @@ const abiTwitter = [
 		"constant": false,
 		"inputs": [
 			{
+				"name": "nickname",
+				"type": "string"
+			},
+			{
+				"name": "biography",
+				"type": "string"
+			}
+		],
+		"name": "createUser",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "userAddress",
+				"type": "address"
+			}
+		],
+		"name": "follow",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "post",
 				"type": "string"
 			}
@@ -11,6 +43,52 @@ const abiTwitter = [
 		"outputs": [],
 		"payable": true,
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "feed",
+		"outputs": [
+			{
+				"components": [
+					{
+						"components": [
+							{
+								"name": "id",
+								"type": "address"
+							},
+							{
+								"name": "nickname",
+								"type": "string"
+							},
+							{
+								"name": "biography",
+								"type": "string"
+							},
+							{
+								"name": "active",
+								"type": "bool"
+							}
+						],
+						"name": "user",
+						"type": "tuple"
+					},
+					{
+						"name": "tweet",
+						"type": "string"
+					},
+					{
+						"name": "publication_date",
+						"type": "uint256"
+					}
+				],
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -47,45 +125,8 @@ const abiTwitter = [
 	},
 	{
 		"constant": true,
-		"inputs": [
-			{
-				"name": "nickname",
-				"type": "string"
-			}
-		],
-		"name": "searchUserByNickname",
-		"outputs": [
-			{
-				"components": [
-					{
-						"name": "id",
-						"type": "address"
-					},
-					{
-						"name": "nickname",
-						"type": "string"
-					},
-					{
-						"name": "biography",
-						"type": "string"
-					},
-					{
-						"name": "active",
-						"type": "bool"
-					}
-				],
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
 		"inputs": [],
-		"name": "feed",
+		"name": "getMyTweets",
 		"outputs": [
 			{
 				"components": [
@@ -143,20 +184,6 @@ const abiTwitter = [
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "userAddress",
-				"type": "address"
-			}
-		],
-		"name": "follow",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
@@ -194,63 +221,36 @@ const abiTwitter = [
 		"type": "function"
 	},
 	{
-		"constant": false,
+		"constant": true,
 		"inputs": [
 			{
 				"name": "nickname",
 				"type": "string"
-			},
-			{
-				"name": "biography",
-				"type": "string"
 			}
 		],
-		"name": "createUser",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getMyTweets",
+		"name": "searchUserByNickname",
 		"outputs": [
 			{
 				"components": [
 					{
-						"components": [
-							{
-								"name": "id",
-								"type": "address"
-							},
-							{
-								"name": "nickname",
-								"type": "string"
-							},
-							{
-								"name": "biography",
-								"type": "string"
-							},
-							{
-								"name": "active",
-								"type": "bool"
-							}
-						],
-						"name": "user",
-						"type": "tuple"
+						"name": "id",
+						"type": "address"
 					},
 					{
-						"name": "tweet",
+						"name": "nickname",
 						"type": "string"
 					},
 					{
-						"name": "publication_date",
-						"type": "uint256"
+						"name": "biography",
+						"type": "string"
+					},
+					{
+						"name": "active",
+						"type": "bool"
 					}
 				],
 				"name": "",
-				"type": "tuple[]"
+				"type": "tuple"
 			}
 		],
 		"payable": false,
