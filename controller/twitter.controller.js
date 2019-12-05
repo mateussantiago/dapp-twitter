@@ -57,7 +57,7 @@ exports.profile = (req, res) => {
 
 exports.home = (req, res) => {
     twitter.twitterContract.methods.feed().call().then(tweets => {
-
+        console.log(tweets);
         res.render("pages/home", {
             tweets : tweets.sort((a, b) => b.publication_date - a.publication_date)
         });
@@ -98,7 +98,8 @@ exports.findUser = (req, res) => {
         twitter.twitterContract.methods.searchUserByAddress(query).call().then(userFound => {
             
             res.render("pages/search", {
-                user : userFound
+                user : userFound,
+                link : "/follow/" + userFound.id
             });
         }).catch(error => {
             console.log(error);
@@ -108,9 +109,11 @@ exports.findUser = (req, res) => {
     }
     else {
         twitter.twitterContract.methods.searchUserByNickname(query).call().then(userFound => {
-            
+            const link = "/follow/" + userFound.id;
+
             res.render("pages/search", {
-               user : userFound 
+               user : userFound,
+               link : "/follow/" + userFound.id
             });
         }).catch(error => {
             console.log(error);
@@ -118,6 +121,32 @@ exports.findUser = (req, res) => {
             res.redirect("/home");
         });
     }
+};
+
+exports.follow = (req, res) => {
+    const userToFollow = req.params.id;
+
+    twitter.userAddress.then(userAddress => {
+        const bodyTransaction = {
+            from : userAddress,
+            value : 1000000000000000000*0.3,
+            gas : 3000000
+        }
+
+        twitter.twitterContract.methods.follow(userToFollow).send(bodyTransaction).then(result => {
+
+            res.redirect("/home");
+        }).catch(error => {
+            console.log(error);
+
+            res.redirect("/home");
+        });
+    }).catch(error => {
+        console.log(error);
+
+        res.redirect("/home");
+    })
+
 };
 
 

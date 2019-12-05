@@ -1,6 +1,6 @@
 const web3 = require('../config/web3.config');
 const abi = require('../contracts/twitter.abi');
-const addressContract = "0x4F9732dF50847fd135591514E696241Dc7eFFfC0";
+const addressContract = "0x1036de124bb50491056C50990F0eB0e32d90494c";
 
 const twitterContract = new web3.eth.Contract(abi.abiTwitter, addressContract);
 

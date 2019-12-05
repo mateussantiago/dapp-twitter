@@ -24,6 +24,15 @@
         <div class="col" id="main">
             <div class="container">
                 <div class="container-fluid card card-outline-secondary my-4">
+                    <div class="card-header">
+                        <% if (user.active) { %>
+                            <div class="row">
+                                <div class="ml-auto p-2">
+                                    <a href="<%= link %>" class="btn btn-success" role="button">Follow</a>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
                     <div class="card-body">
                         <div class="media mb-4">
                             <div class="media-body">
