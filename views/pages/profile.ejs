@@ -1,34 +1,58 @@
 <%- contentFor('body') %>
-<div id="content">
-    <div class="container">
-        <div class="container-fluid card my-4">
-            <div class="card-body">
-                <form action="/publishTweet" method="post">
-                    <div class="form-group">
-                        <textarea class="form-control" id="tweet" rows="1" placeholder="What's happening?" name="tweet"></textarea>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Publish</button>
-                </form>
-            </div>
+<div class="col-sm-2 px-1 bg-dark min-vh-100">
+        <div class="py-2 sticky-top flex-grow-1">
+            <nav class="flex-sm-column">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#">Dwitter</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="/home">Home</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="/profile">Profile</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="/following">Following</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </div>  
-    <div class="container">
-            <% for(tweet of myTweets) {%>
-                <div class="container-fluid card card-outline-secondary my-4">
+</div>
+<div class="col" id="main">
+    <div id="content">
+        <div class="col" id="main">
+            <div class="container">
+                <div class="container-fluid card my-4">
                     <div class="card-body">
-                        <div class="media mb-4">
-                            <div class="media-body">
-                                <p class="mt-0 user"> <%= tweet.user["nickname"] %>
-                                <br>
-                                <small class="text-muted"><%= tweet.user["id"] %></small>
-                                </p>
-                                <p class="mt-0 user"><%= tweet["tweet"] %></p>
-                                <br>
-                                <small class="text-muted"><%= new Date(tweet["publication_date"] * 1000) %></small>
+                        <form action="/publishTweet" method="post">
+                            <div class="form-group">
+                                <textarea class="form-control" id="tweet" rows="1" placeholder="What's happening?" name="tweet"></textarea>
+                            </div>
+                            <button class="btn btn-secondary" type="submit">Publish</button>
+                        </form>
+                    </div>
+                </div>
+            </div>  
+            <div class="container">
+                <% for(tweet of myTweets) {%>
+                    <div class="container-fluid card card-outline-secondary my-4">
+                        <div class="card-body">
+                            <div class="media mb-4">
+                                <div class="media-body">
+                                    <p class="mt-0 user"> <%= tweet.user["nickname"] %>
+                                    <br>
+                                    <small class="text-muted"><%= tweet.user["id"] %></small>
+                                    </p>
+                                    <p class="mt-0 user"><%= tweet["tweet"] %></p>
+                                    <br>
+                                    <small class="text-muted"><%= new Date(tweet["publication_date"] * 1000) %></small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <% } %>
+                <% } %>
+            </div>
         </div>
+    </div>
 </div>

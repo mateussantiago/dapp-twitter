@@ -3,19 +3,17 @@ const twitter = require('../model/twitter');
 exports.login = (req, res) => {
     twitter.twitterContract.methods.isUser().call().then(isUser => {
         if (isUser) {
-            console.log("entrei")
             res.redirect("/home");
             
             return;
         }
-        console.log(isUser)
+        
         res.render("pages/login");
 
     }).catch(error => {
         console.log(error)
         
-
-        res.render("index");
+        res.render("pages/login");
     });
 };
 
@@ -102,6 +100,10 @@ exports.findUser = (req, res) => {
             res.render("pages/search", {
                 user : userFound
             });
+        }).catch(error => {
+            console.log(error);
+
+            res.redirect("/home");
         });
     }
     else {
@@ -110,21 +112,24 @@ exports.findUser = (req, res) => {
             res.render("pages/search", {
                user : userFound 
             });
+        }).catch(error => {
+            console.log(error);
+
+            res.redirect("/home");
         });
     }
-
 };
 
 
-exports.findTweetsByAddress = (req, res) => {
-    twitter.methods.getTweetsByAddress().call().then(tweets => {
-        console.log(tweets);
-        res.render("index", {
-            title : "Tweets",
-            tweets : tweets
-        });        
-    }).catch(err => {
-        console.log(err);
-        res.status(500).jsonp({error : "Internal error"});
+exports.following = (req, res) => {
+    twitter.twitterContract.methods.getFollowing().call().then(users => {
+        console.log(users);
+        res.render("pages/following", {
+           users : users 
+        });
+    }).catch(error => {
+        console.log(error);
+
+        res.redirect("/home");
     });
 };

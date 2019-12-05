@@ -12,5 +12,6 @@ router.get("/home", twitterController.home);
 router.get("/profile", twitterController.profile);
 router.post("/publishTweet", twitterController.publishTweet);
 router.post("/searchUser", twitterController.findUser);
+router.get("/following", twitterController.following);
 
 module.exports = router; 

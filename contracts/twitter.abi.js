@@ -97,8 +97,26 @@ var abiTwitter = [
 		"name": "getFollowing",
 		"outputs": [
 			{
+				"components": [
+					{
+						"name": "id",
+						"type": "address"
+					},
+					{
+						"name": "nickname",
+						"type": "string"
+					},
+					{
+						"name": "biography",
+						"type": "string"
+					},
+					{
+						"name": "active",
+						"type": "bool"
+					}
+				],
 				"name": "",
-				"type": "address[]"
+				"type": "tuple[]"
 			}
 		],
 		"payable": false,
