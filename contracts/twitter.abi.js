@@ -1,4 +1,4 @@
-var abiTwitter = [
+const abiTwitter = [
 	{
 		"constant": false,
 		"inputs": [

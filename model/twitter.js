@@ -1,6 +1,7 @@
 const web3 = require('../config/web3.config');
+require("dotenv").config();
 const abi = require('../contracts/twitter.abi');
-const addressContract = "0x1036de124bb50491056C50990F0eB0e32d90494c";
+const addressContract = process.env.ADDRESS_CONTRACT;
 
 const twitterContract = new web3.eth.Contract(abi.abiTwitter, addressContract);
 

@@ -57,7 +57,7 @@ exports.profile = (req, res) => {
 
 exports.home = (req, res) => {
     twitter.twitterContract.methods.feed().call().then(tweets => {
-        console.log(tweets);
+        
         res.render("pages/home", {
             tweets : tweets.sort((a, b) => b.publication_date - a.publication_date)
         });
@@ -152,7 +152,7 @@ exports.follow = (req, res) => {
 
 exports.following = (req, res) => {
     twitter.twitterContract.methods.getFollowing().call().then(users => {
-        console.log(users);
+        
         res.render("pages/following", {
            users : users 
         });
