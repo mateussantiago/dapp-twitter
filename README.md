@@ -20,7 +20,7 @@ npm install
 ```
 #### Variáveis de ambiente
 Antes de executar o projeto é preciso definir duas variáveis de ambiente: <b>PORT</b>  e <b>ADDRESS_CONTRACT</b>.
-Para isso, basta criar um arquivo .env no diretório do projeto e inserir as variáveis de ambiente.
+Para isso, basta criar um arquivo .env no diretório do src/ e inserir as variáveis de ambiente.
 
 <b>PORT=</b><A porta em que a aplicação vai executar> </br>
 <b>ADDRESS_CONTRACT=</b><Endereço do contrato>
